@@ -1,4 +1,6 @@
 %filename: cvsolve.m
+% This script sovles the equation Mdiff(cv,r) = 0
+% by bisection method
 if(Mdiff(0,r)>0)
   %stop program and issue error message:
   error('M is too large')

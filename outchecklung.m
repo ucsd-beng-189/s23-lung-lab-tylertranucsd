@@ -28,10 +28,10 @@ cA=PA/RT;
 cv
 %
 %mean arterial oxygen concentration:
-cabar=Q' *ca/sum(Q)
+cabar1=Q' *ca/sum(Q)
 %  
 %mean alveolar oxygen concentration:
-cAbar=VA'*cA/sum(VA)
+cAbar2=VA'*cA/sum(VA)
 %
 %oxygen concentration is the inspired air:
 cI
@@ -40,22 +40,22 @@ cI
 Pv=H(cv)
 %
 %mean arterial oxygen partial pressure:
-Pabar=H(cabar)
+Pabar1 =H(cabar1)
 %
 %mean alveolar oxygen partial pressure:
-PAbar=RT*cAbar
+PAbar2 =RT*cAbar2
 %
 %oxygen partial pressure in the inspired air:
 PI=RT*cI
 % 
 %check that partial pressures are in expected order
-if((Pv<Pabar)&(Pabar<=PAbar)&(PAbar<PI))
+if((Pv<Pabar1)&(Pabar1<=PAbar2)&(PAbar2<PI))
   'partial pressures ordered as expected' 
 else
   'WARNING: partial pressures NOT ordered as expected'
   Pv
-  Pabar
-  PAbar
+  Pabar1
+  PAbar2
   PI
 end
 %
@@ -82,12 +82,15 @@ check6=abs(M-fa)/abs(M)
 %(plot individual points instead of lines 
 %since r values are not in order)
 %define vector with all unit entries:
-u=ones(n,1);
-cblood=[cv*u cabar*u ca];
-cair=  [cI*u cAbar*u cA];
-Pressures=[Pv*u Pabar*u PAbar*u PI*u Pa PA];
-figure(2)
-subplot(2,1,1),plot(r,cblood,'.')
-subplot(2,1,2),plot(r,cair  ,'.')
-figure(3)
-plot(r,Pressures,'.')
+% u=ones(n,1);
+% cblood=[cv*u cabar*u ca];
+% cair=  [cI*u cAbar*u cA];
+% Pressures=[Pv*u Pabar1*u PAbar2*u PI*u Pa PA];
+% figure(2)
+% subplot(2,1,1),plot(r,cblood,'.')
+% title('r vs. concentration of O_2 in blood')
+% subplot(2,1,2),plot(r,cair  ,'.')
+% title("r vs. concentration of O_2 in inspired air")
+% figure(3)
+% plot(r,Pressures,'.')
+% title("r vs. partial pressure of O_2")
